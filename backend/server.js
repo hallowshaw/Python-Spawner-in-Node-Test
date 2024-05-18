@@ -1,13 +1,18 @@
-// backend/server.js
 const express = require('express');
 const { spawn } = require('child_process');
 const cors = require('cors');
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
-app.use(cors());
+
+// Adjust CORS configuration according to your frontend domain
+const corsOptions = {
+    origin: 'https://jade-tartufo-02d94f.netlify.app',
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+app.use(cors(corsOptions));
 
 app.post('/run-script', (req, res) => {
     const { word } = req.body;
@@ -29,5 +34,5 @@ app.post('/run-script', (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
 });
