@@ -1,4 +1,3 @@
-// frontend/src/App.js
 import React, { useState } from "react";
 import axios from "axios";
 
@@ -9,9 +8,12 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/run-script", {
-        word: inputWord,
-      });
+      const response = await axios.post(
+        "https://test-app-ty7f.onrender.com/run-script",
+        {
+          word: inputWord,
+        }
+      );
       setOutput(response.data);
     } catch (error) {
       console.error("Error:", error);
